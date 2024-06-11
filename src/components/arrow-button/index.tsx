@@ -1,1 +1,1 @@
-export { ArrowButton } from './ArrowButton';
+export { default as ArrowButton } from './ArrowButton';
