@@ -1,1 +1,1 @@
-export { default as ArticleParamsForm } from './ArticleParamsForm';
+export { ArticleParamsForm } from './ArticleParamsForm';

@@ -1,21 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import arrow from 'src/images/arrow.svg';
 import styles from './ArrowButton.module.scss';
 
-const ArrowButton: React.FC = () => {
-	const [isOpen, setIsOpen] = useState(false);
+interface ArrowButtonProps {
+	isOpen: boolean;
+	onClick: () => void;
+}
 
-	const toggleSidebar = () => {
-		setIsOpen(!isOpen);
-	};
-
+const ArrowButton: React.FC<ArrowButtonProps> = ({ isOpen, onClick }) => {
 	return (
 		<div
 			role='button'
 			aria-label='Открыть/Закрыть форму параметров статьи'
 			tabIndex={0}
 			className={`${styles.container} ${isOpen ? styles.container_open : ''}`}
-			onClick={toggleSidebar}>
+			onClick={onClick}>
 			<img
 				src={arrow}
 				alt='иконка стрелочки'

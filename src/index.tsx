@@ -8,13 +8,22 @@ import { defaultArticleState } from './constants/articleProps';
 import './styles/index.scss';
 import styles from './styles/index.module.scss';
 
+interface ArticleStyles {
+	fontFamilyOption: { value: string };
+	fontSizeOption: { value: string };
+	fontColor: { value: string };
+	contentWidth: { value: string };
+	backgroundColor: { value: string };
+}
+
 const domNode = document.getElementById('root') as HTMLDivElement;
 const root = createRoot(domNode);
 
 const App = () => {
-	const [articleStyles, setArticleStyles] = useState(defaultArticleState);
+	const [articleStyles, setArticleStyles] =
+		useState<ArticleStyles>(defaultArticleState);
 
-	const applyStyles = (newStyles) => {
+	const applyStyles = (newStyles: ArticleStyles) => {
 		setArticleStyles(newStyles);
 	};
 

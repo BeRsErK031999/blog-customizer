@@ -1,14 +1,23 @@
 import React, { useState } from 'react';
-import { ArrowButton } from 'components/arrow-button';
+import ArrowButton from 'components/arrow-button';
 import { Button } from 'components/button';
 import styles from './ArticleParamsForm.module.scss';
 
-export const ArticleParamsForm = ({ applyStyles, initialStyles }) => {
+interface ArticleParamsFormProps {
+	applyStyles: (newStyles: any) => void;
+	initialStyles: any;
+}
+
+export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
+	applyStyles,
+	initialStyles,
+}) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [formState, setFormState] = useState(initialStyles);
 
 	const toggleSidebar = () => {
 		setIsOpen(!isOpen);
+		console.log('Sidebar toggled', !isOpen);
 	};
 
 	const handleChange = (
@@ -31,37 +40,40 @@ export const ArticleParamsForm = ({ applyStyles, initialStyles }) => {
 		applyStyles(initialStyles);
 	};
 
+	console.log('Rendering sidebar', isOpen); // Перемещено сюда
+
 	return (
 		<>
 			<ArrowButton isOpen={isOpen} onClick={toggleSidebar} />
-			{isOpen && (
-				<aside className={styles.container}>
-					<form className={styles.form} onSubmit={handleSubmit}>
-						<label>
-							Размер шрифта:
-							<input
-								type='text'
-								name='fontSize'
-								value={formState.fontSize}
-								onChange={handleChange}
-							/>
-						</label>
-						<label>
-							Цвет:
-							<input
-								type='color'
-								name='color'
-								value={formState.color}
-								onChange={handleChange}
-							/>
-						</label>
-						<div className={styles.bottomContainer}>
-							<Button title='Сбросить' type='button' onClick={handleReset} />
-							<Button title='Применить' type='submit' />
-						</div>
-					</form>
-				</aside>
-			)}
+			<aside
+				className={`${styles.container} ${
+					isOpen ? styles.container_open : ''
+				}`}>
+				<form className={styles.form} onSubmit={handleSubmit}>
+					<label>
+						Размер шрифта:
+						<input
+							type='text'
+							name='fontSize'
+							value={formState.fontSize}
+							onChange={handleChange}
+						/>
+					</label>
+					<label>
+						Цвет:
+						<input
+							type='color'
+							name='color'
+							value={formState.color}
+							onChange={handleChange}
+						/>
+					</label>
+					<div className={styles.bottomContainer}>
+						<Button title='Сбросить' type='button' onClick={handleReset} />
+						<Button title='Применить' type='submit' />
+					</div>
+				</form>
+			</aside>
 		</>
 	);
 };
