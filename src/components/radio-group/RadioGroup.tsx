@@ -4,6 +4,7 @@ import { Option } from './Option';
 import styles from './RadioGroup.module.scss';
 
 type RadioGroupProps = {
+	name: string; // Добавляем name
 	options: OptionType[];
 	selected: OptionType;
 	onChange?: (value: OptionType) => void;
@@ -11,7 +12,7 @@ type RadioGroupProps = {
 };
 
 export const RadioGroup = (props: RadioGroupProps) => {
-	const { options, selected, onChange, title } = props;
+	const { name, options, selected, onChange, title } = props;
 
 	const handleChange = (option: OptionType) => onChange?.(option);
 
@@ -28,6 +29,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 				{options.map((option) => (
 					<Option
 						key={option.value}
+						groupName={name} // Используем name для groupName
 						value={option.value}
 						title={option.title}
 						selected={selected}

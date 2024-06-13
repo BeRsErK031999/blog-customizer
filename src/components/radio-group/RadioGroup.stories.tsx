@@ -1,5 +1,4 @@
 import type { Meta, StoryObj } from '@storybook/react';
-
 import { RadioGroup } from './RadioGroup';
 import { useState } from 'react';
 
@@ -23,7 +22,7 @@ const RadioGroupWithState = () => {
 		<>
 			<RadioGroup
 				selected={selected}
-				name='radio'
+				name='radio' // Добавляем name
 				onChange={setSelected}
 				options={options}
 				title='Название радиогруппы'
