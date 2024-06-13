@@ -68,7 +68,7 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 					isOpen ? styles.container_open : ''
 				}`}>
 				<form className={styles.form} onSubmit={handleSubmit}>
-					<h2 className={styles.header}>ЗАДАЙТЕ ПАРАМЕТРЫ</h2>
+					<h2 className={styles.header}>задайте параметры</h2>
 					<label style={{ marginTop: '50px' }}>
 						<Select
 							selected={formState.fontFamilyOption}
@@ -81,6 +81,7 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 					</label>
 					<label style={{ marginTop: '50px' }}>
 						<RadioGroup
+							name='fontSize' // добавлено свойство name
 							options={fontSizeOptions}
 							selected={formState.fontSizeOption}
 							onChange={handleRadioChange}
