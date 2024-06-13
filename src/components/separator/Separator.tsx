@@ -1,5 +1,9 @@
 import styles from './index.module.scss';
 
-export const Separator = () => {
-	return <div className={styles.separator}></div>;
+type SeparatorProps = {
+	style?: React.CSSProperties; // Добавляем поддержку стиля
+};
+
+export const Separator: React.FC<SeparatorProps> = ({ style }) => {
+	return <div className={styles.separator} style={style}></div>;
 };

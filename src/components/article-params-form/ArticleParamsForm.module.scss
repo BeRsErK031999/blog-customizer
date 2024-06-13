@@ -1,9 +1,12 @@
+// ArticleParamsForm.module.scss
+
 .container {
 	position: fixed;
 	left: 0;
+	z-index: 10; /* Добавьте это, чтобы убедиться, что контейнер находится выше других элементов */
 	width: 616px;
 	height: 100%;
-	overflow: scroll;
+	overflow: hidden;
 	transform: translate(-616px);
 	transition: transform 0.5s ease;
 }
@@ -21,6 +24,7 @@
 	height: auto;
 	min-height: 100%;
 	padding: 50px 31px;
+	overflow: hidden;
 	background-color: #ffffff;
 	border-right: 1px solid #000000;
 }
@@ -29,4 +33,12 @@
 	display: flex;
 	justify-content: space-between;
 	margin-top: auto;
+}
+
+.header {
+	margin-bottom: 50px;
+	font-weight: 800;
+	font-size: 31px;
+	text-align: center;
+	text-transform: uppercase;
 }

@@ -1,11 +1,9 @@
 import { OptionType } from 'src/constants/articleProps';
 import { Text } from 'components/text';
 import { Option } from './Option';
-
 import styles from './RadioGroup.module.scss';
 
 type RadioGroupProps = {
-	name: string;
 	options: OptionType[];
 	selected: OptionType;
 	onChange?: (value: OptionType) => void;
@@ -13,7 +11,7 @@ type RadioGroupProps = {
 };
 
 export const RadioGroup = (props: RadioGroupProps) => {
-	const { name, options, selected, onChange, title } = props;
+	const { options, selected, onChange, title } = props;
 
 	const handleChange = (option: OptionType) => onChange?.(option);
 
@@ -30,7 +28,6 @@ export const RadioGroup = (props: RadioGroupProps) => {
 				{options.map((option) => (
 					<Option
 						key={option.value}
-						groupName={name}
 						value={option.value}
 						title={option.title}
 						selected={selected}

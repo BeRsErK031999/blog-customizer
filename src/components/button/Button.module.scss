@@ -8,6 +8,7 @@
 	text-align: center;
 	border: 1px solid #000000;
 	cursor: pointer;
+	transition: background-color 0.2s, color 0.2s;
 }
 
 .button:active {
@@ -15,5 +16,30 @@
 }
 
 .button:hover {
+	background: var(--gold, #ffc802);
+}
+
+.button-reset {
+	background: white;
+}
+
+.button-reset:hover {
+	color: white; // Изменяем цвет текста на белый при наведении
+	background: black;
+}
+
+.button-reset:active {
+	background: white;
+}
+
+.button-apply {
+	background: var(--gold, #ffc802);
+}
+
+.button-apply:hover {
+	background: var(--gold-light, #ffedab);
+}
+
+.button-apply:active {
 	background: var(--gold, #ffc802);
 }
