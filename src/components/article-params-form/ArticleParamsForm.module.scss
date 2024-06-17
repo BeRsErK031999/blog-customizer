@@ -1,9 +1,7 @@
-// ArticleParamsForm.module.scss
-
 .container {
 	position: fixed;
 	left: 0;
-	z-index: 10; /* Добавьте это, чтобы убедиться, что контейнер находится выше других элементов */
+	z-index: 10;
 	width: 616px;
 	height: 100%;
 	overflow: hidden;
@@ -41,4 +39,8 @@
 	font-size: 31px;
 	text-align: center;
 	text-transform: uppercase;
+}
+
+.marginTop50 {
+	margin-top: 50px;
 }

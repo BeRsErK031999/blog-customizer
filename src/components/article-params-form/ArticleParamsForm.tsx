@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
+import clsx from 'clsx';
 import ArrowButton from 'components/arrow-button';
 import { Button } from 'components/button';
 import { Select } from 'components/select/Select';
@@ -27,6 +28,7 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const [formState, setFormState] = useState<ArticleStateType>(initialStyles);
+	const sidebarRef = useRef<HTMLDivElement>(null);
 
 	const toggleSidebar = () => {
 		setIsOpen(!isOpen);
@@ -50,7 +52,7 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 		}));
 	};
 
-	const handleSubmit = (e: React.FormEvent) => {
+	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
 		applyStyles(formState);
 	};
@@ -60,16 +62,35 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 		applyStyles(initialStyles);
 	};
 
+	const handleClickOutside = (event: MouseEvent) => {
+		if (
+			sidebarRef.current &&
+			!sidebarRef.current.contains(event.target as Node)
+		) {
+			setIsOpen(false);
+		}
+	};
+
+	useEffect(() => {
+		if (isOpen) {
+			document.addEventListener('mousedown', handleClickOutside);
+		} else {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		};
+	}, [isOpen]);
+
 	return (
 		<>
 			<ArrowButton isOpen={isOpen} onClick={toggleSidebar} />
 			<aside
-				className={`${styles.container} ${
-					isOpen ? styles.container_open : ''
-				}`}>
+				ref={sidebarRef}
+				className={clsx(styles.container, { [styles.container_open]: isOpen })}>
 				<form className={styles.form} onSubmit={handleSubmit}>
-					<h2 className={styles.header}>задайте параметры</h2>
-					<label style={{ marginTop: '50px' }}>
+					<h2 className={styles.header}>ЗАДАЙТЕ ПАРАМЕТРЫ</h2>
+					<label className={styles.marginTop50}>
 						<Select
 							selected={formState.fontFamilyOption}
 							options={fontFamilyOptions}
@@ -79,16 +100,16 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 							title='Шрифт'
 						/>
 					</label>
-					<label style={{ marginTop: '50px' }}>
+					<label className={styles.marginTop50}>
 						<RadioGroup
-							name='fontSize' // добавлено свойство name
+							name='fontSize'
 							options={fontSizeOptions}
 							selected={formState.fontSizeOption}
 							onChange={handleRadioChange}
 							title='Размер шрифта'
 						/>
 					</label>
-					<label style={{ marginTop: '50px' }}>
+					<label className={styles.marginTop50}>
 						<Select
 							selected={formState.fontColor}
 							options={fontColors}
@@ -96,8 +117,10 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 							title='Цвет шрифта'
 						/>
 					</label>
-					<Separator style={{ marginTop: '50px' }} />
-					<label style={{ marginTop: '50px' }}>
+					<div className={styles.marginTop50}>
+						<Separator />
+					</div>
+					<label className={styles.marginTop50}>
 						<Select
 							selected={formState.backgroundColor}
 							options={backgroundColors}
@@ -107,7 +130,7 @@ export const ArticleParamsForm: React.FC<ArticleParamsFormProps> = ({
 							title='Цвет фона'
 						/>
 					</label>
-					<label style={{ marginTop: '50px' }}>
+					<label className={styles.marginTop50}>
 						<Select
 							selected={formState.contentWidth}
 							options={contentWidthArr}
