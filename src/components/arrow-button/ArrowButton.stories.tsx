@@ -1,20 +1,19 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import React, { useState } from 'react';
+import { Meta, Story } from '@storybook/react';
+import ArrowButton from './ArrowButton';
 
-import { ArrowButton } from './ArrowButton';
-
-const meta: Meta<typeof ArrowButton> = {
+export default {
+	title: 'Components/ArrowButton',
 	component: ArrowButton,
+} as Meta;
+
+const Template: Story<{ isOpen: boolean }> = (args) => {
+	const [isOpen, setIsOpen] = useState(args.isOpen);
+
+	return <ArrowButton isOpen={isOpen} onClick={() => setIsOpen(!isOpen)} />;
 };
 
-export default meta;
-type Story = StoryObj<typeof ArrowButton>;
-
-export const ArrowButtonStory: Story = {
-	render: () => {
-		return (
-			<>
-				<ArrowButton />
-			</>
-		);
-	},
+export const Default = Template.bind({});
+Default.args = {
+	isOpen: false,
 };

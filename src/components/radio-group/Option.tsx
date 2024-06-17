@@ -9,7 +9,7 @@ type OptionProps = {
 	value: OptionType['value'];
 	title: OptionType['title'];
 	selected: OptionType;
-	groupName: string;
+	groupName?: string; // Добавляем groupName как необязательное свойство
 	onChange?: (option: OptionType) => void;
 	option: OptionType;
 };
@@ -23,8 +23,8 @@ export const Option = (props: OptionProps) => {
 
 	useEnterSubmit({ onChange, option });
 
-	const inputId = `${groupName}_radio_item_with_value__${value}`;
-	const isChecked = value === selected.title;
+	const inputId = `${groupName || 'default'}_radio_item_with_value__${value}`;
+	const isChecked = value === selected.value;
 
 	return (
 		<div
